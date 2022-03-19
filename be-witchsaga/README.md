@@ -64,4 +64,4 @@ $ kubectl get pod -n witch-saga
 $ kubectl port-forward -n witch-saga pod/witch-saga-6d5b6c5b85-p4klc 8081:80
 ```
 ### Step 6 : Access using Browser in this URL
-http://localhost:8081/movie-service/swagger-ui/
+http://localhost:8081/witch-app/swagger-ui/
