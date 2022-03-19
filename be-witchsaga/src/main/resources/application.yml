@@ -1,0 +1,36 @@
+server:
+  port: ${SERVICE_INTERNAL_PORT:9000}
+  servlet:
+    context-path: /witch-saga/
+spring:
+  application:
+    name: witch-saga
+  profiles:
+    active: dev
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:witchsaga}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:andregokil}
+    driverClassName: org.postgresql.Driver
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false
+# API Info
+api-infos:
+  web-channel:
+    api-version: 1.0.0
+    title: Witch Saga API
+    domain: ${server.servlet.context-path}
+    description: Witch Saga API
+    group: witch
+    contact: andreasgunawan95@gmail.com
+logging:
+  level:
+    org.hibernate: DEBUG
