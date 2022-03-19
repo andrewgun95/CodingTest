@@ -1,0 +1,5 @@
+ext {
+    swagger_version="1.5.12"
+    mapstruct_version="1.2.0.Final"
+    lombok_version="1.18.8"
+}

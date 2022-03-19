@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: witch-saga
+spec:
+  selector:
+    matchLabels:
+      app: witch-saga
+  template:
+    metadata:
+      labels:
+        app: witch-saga
+    spec:
+      initContainers:
+        - name: init-db
+          image: "busybox:1.28"
+          imagePullPolicy: "IfNotPresent"
+          command:
+            - sh
+            - -c
+            - until printf "." && nc -z -w 2 postgresql 5432; do sleep 2; done; echo 'DB OK ✓'
+      containers:
+        - name: witch-saga-service
+          image: "localhost:5000/witch-saga-app:0.0.1-SNAPSHOT"
+          imagePullPolicy: Always
+          env:
+            - name: JAVA_OPTS
+              value: "-Xmx256m -Xms128m"
+            - name: SERVICE_INTERNAL_PORT
+              value: "80"
+            - name: SERVICE_NAME
+              value: "witch-saga-service"
+            - name: POSTGRES_HOST
+              value: "postgresql"
+            - name: POSTGRES_DB
+              value: "witchsaga"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_USERNAME
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "andregokil"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

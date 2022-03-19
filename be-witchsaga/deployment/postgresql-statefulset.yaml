@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: postgresql
+  name: postgresql
+spec:
+  selector:
+    matchLabels:
+      app: postgresql
+  serviceName: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+      name: postgresql
+    spec:
+      containers:
+        - env:
+            - name: POSTGRESQL_VOLUME_DIR
+              value: /data/postgresql
+            - name: PGDATA
+              value: /data/postgresql/data
+            - name: POSTGRES_DB
+              value: witchsaga
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: andregokil
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
+          name: postgresql
+          ports:
+            - containerPort: 5432
+              name: postgresql
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data/postgresql
+              name: data
+      restartPolicy: Always
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        volumeMode: Filesystem
