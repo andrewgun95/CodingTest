@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class WitchUtilsTest {
 
     @Test
-    public void givenNumber_whenCountKill_theGotValidResult() {
+    public void givenNumber_whenCountKill_thenGotValidResult() {
         Assertions.assertEquals(0, WitchUtils.countKill(0));
         Assertions.assertEquals(1, WitchUtils.countKill(1));
         // Scenario 1 : 0 + 1 + 1 = 2
