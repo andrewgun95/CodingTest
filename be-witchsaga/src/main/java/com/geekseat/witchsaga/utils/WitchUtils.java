@@ -10,13 +10,25 @@ public class WitchUtils {
      * @return kill count (number of villagers)
      */
     public static Integer countKill(Integer year) {
-        if (year < 0) {
-            return -1;
-        } else if (year < 2) {
-            return year;
-        } else {
-            return countKill(year - 1) + countKill(year - 2) + 1;
+        int a = 1;
+        if (year == a) {
+            return a;
         }
+        int b = 2;
+        if (year == b) {
+            return b;
+        }
+
+        int c = 0;
+
+        for (int i = 2; i < year; i++) {
+            c = (a + b) + 1;
+            // swap variable
+            a = b;
+            b = c;
+        }
+
+        return c;
     }
 
 }
