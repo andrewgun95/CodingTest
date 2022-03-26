@@ -85,7 +85,7 @@ public class PersonServiceImpl implements PersonService {
                 return -1.0;
             }
 
-            result += WitchUtils.countKill(bornOfYear.intValue()).doubleValue() / personList.size();
+            result += WitchUtils.countKill(bornOfYear.longValue()).doubleValue() / personList.size();
         }
 
         if (result > 0.0) {

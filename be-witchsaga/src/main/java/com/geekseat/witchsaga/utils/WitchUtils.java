@@ -1,5 +1,7 @@
 package com.geekseat.witchsaga.utils;
 
+import java.math.BigInteger;
+
 public class WitchUtils {
 
     /**
@@ -9,20 +11,20 @@ public class WitchUtils {
      * @param year year
      * @return kill count (number of villagers)
      */
-    public static Integer countKill(Integer year) {
-        int a = 1;
-        if (year == a) {
+    public static BigInteger countKill(long year) {
+        BigInteger a = BigInteger.valueOf(1L);
+        if (a.compareTo(BigInteger.valueOf(year)) == 0) {
             return a;
         }
-        int b = 2;
-        if (year == b) {
+        BigInteger b = BigInteger.valueOf(2L);
+        if (b.compareTo(BigInteger.valueOf(year)) == 0) {
             return b;
         }
 
-        int c = 0;
+        BigInteger c = BigInteger.ZERO;
 
-        for (int i = 2; i < year; i++) {
-            c = (a + b) + 1;
+        for (long i = 2; i < year; i++) {
+            c = a.add(b).add(BigInteger.ONE);
             // swap variable
             a = b;
             b = c;
